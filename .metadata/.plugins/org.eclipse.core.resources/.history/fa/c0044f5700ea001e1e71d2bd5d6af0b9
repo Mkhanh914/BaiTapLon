@@ -1,0 +1,124 @@
+//package thread;
+//
+//import java.awt.*;
+//
+//import javax.swing.*;
+//import javax.swing.border.EmptyBorder;
+//
+//public class bai1 extends JFrame {
+//
+//	private static final long serialVersionUID = 1L;
+//	private JPanel contentPane;
+//
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					bai1 frame = new bai1();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+//
+//	/**
+//	 * Create the frame.
+//	 */
+//	public bai1() {
+//		//  tao khung hinh  anh
+//		ImageIcon imageIcon= new ImageIcon("startImg1.jpg");
+//		JLabel jLabel = new JLabel(imageIcon);
+//		// tao 1 jfame de chua cac khug hinh ay vao
+//		contentPane = new JPanel(new GridBagLayout());
+//
+//		// tao ra 3 button
+//		Button batDauButton = new Button("Bat Dau");
+//		Button xepHangButton = new Button("Xep Hang");
+//		Button ThoatButton = new Button("Thoat");
+//		contentPane.add(jLabel, 0);
+//		contentPane.add(batDauButton, 1);
+//		contentPane.add(xepHangButton,2);
+//		contentPane.add(ThoatButton,3);
+//
+//		setDefaultCloseOperation(EXIT_ON_CLOSE);
+//
+//		setContentPane(contentPane);
+//		setSize(imageIcon.getIconWidth() , imageIcon.getIconHeight());
+//		setResizable(false);
+//		setVisible(true);
+//
+//
+//
+//	}
+//
+//
+//
+//}
+package thread;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class bai1 extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					bai1 frame = new bai1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public bai1() {
+		// Tạo ImageIcon từ tệp hình ảnh
+		ImageIcon imageIcon = new ImageIcon("hinhanh.jpg");
+		JLabel jLabel = new JLabel();
+		jLabel.setIcon(imageIcon);
+
+		// Tạo JPanel làm contentPane với GridBagLayout
+		contentPane = new JPanel(new GridBagLayout());
+
+		// Thêm JLabel và các button vào contentPane
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		contentPane.add(jLabel, gbc);
+
+		gbc.gridy = 1;
+		Button batDauButton = new Button("Bat Dau");
+		contentPane.add(batDauButton, gbc);
+
+		gbc.gridy = 2;
+		Button xepHangButton = new Button("Xep Hang");
+		contentPane.add(xepHangButton, gbc);
+
+		gbc.gridy = 3;
+		Button ThoatButton = new Button("Thoat");
+		contentPane.add(ThoatButton, gbc);
+
+		// Đặt contentPane làm nội dung của JFrame
+		setContentPane(contentPane);
+
+		// Tự động điều chỉnh kích thước frame để phù hợp với nội dung
+		pack();
+
+		// Thiết lập một số thuộc tính của frame
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null); // Hiển thị frame ở giữa màn hình
+	}
+}
+
