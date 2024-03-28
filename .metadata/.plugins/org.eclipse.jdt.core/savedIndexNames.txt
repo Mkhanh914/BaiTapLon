@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+D:\Khoa Hoc May Tinh\KI_4\java\BaiTapLon\.metadata\.plugins\org.eclipse.jdt.core
-496778769.index
-1865797976.index
-1506731441.index
