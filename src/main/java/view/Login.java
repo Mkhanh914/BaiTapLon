@@ -15,12 +15,13 @@ public class Login extends JFrame {
         private  JTextField userName ;
         private  JButton OkButton;
         private  JButton exitButton;
-       JLabel backgroundPanel;
+        private JLabel backgroundPanel;
         public  Login(){
             setTitle("Login");
             setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-            setLocationRelativeTo(null);
+            setLocation(400,200);
+
             // code
             JLabel login = new JLabel("Login");
             login.setBounds(140,150,100,30);
@@ -59,7 +60,7 @@ public class Login extends JFrame {
             setVisible(true);
         }
 
-//    public static void main(String[] args) {
-//        new Login();
-//    }
+    public static void main(String[] args) {
+        new Login();
+    }
 }

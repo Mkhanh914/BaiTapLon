@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public class Shape  {
+public  class Shape {
     private Tetrominoes  priceShape ;
     private  int[][] toaDo ;
     private  int[][][] bangToaDo;
@@ -23,6 +23,11 @@ public class Shape  {
         };
         setHinhDangShape(priceShape.noShape);
     }
+
+    public Tetrominoes getPriceShape() {
+        return priceShape;
+    }
+
     public   void setHinhDangShape(Tetrominoes priceShape){
         for (int i = 0; i < 4; i++) {
             // sao chep toaDo tu bangToaDo sang toaDo;

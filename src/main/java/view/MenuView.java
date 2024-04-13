@@ -16,8 +16,10 @@ public class MenuView extends JFrame  {
     protected   JLabel backgroundPanel;
     private JButton thoatButton;
     protected  ImageIcon imageIcon;
+//    protected  static  int x = 300 , y =  400;
+
     public   MenuView(){
-        setLocationRelativeTo(null);
+        setLocation(400,200);
 
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
