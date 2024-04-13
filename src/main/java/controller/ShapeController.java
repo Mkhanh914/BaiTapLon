@@ -114,6 +114,7 @@ public class ShapeController {
          }
          pieceDropped();
     }
+    //  cho  xoa hang cua game khi day va cho cac hang tren ha xuong , cong diem cho ng choi 
     private void removeFullLines() {
          int numFullLine = 0 ;
          for(int i =  getHeight() -1 ; i>=0 ; i--){
