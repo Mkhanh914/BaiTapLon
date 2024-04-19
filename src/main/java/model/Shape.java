@@ -3,6 +3,9 @@ package model;
 import java.util.Random;
 
 public  class Shape {
+    public enum Tetrominoes {
+        noShape ,  zShape , tShape  , sShape , lShape  , squareShape , lShape1  , lineShape ;
+    }
     private Tetrominoes  priceShape ;
     private  int[][] toaDo ;
     private  int[][][] bangToaDo;
@@ -37,25 +40,25 @@ public  class Shape {
         this.priceShape = priceShape;
     }
     public  void setX(int index , int x){ toaDo[index][0] = x;}
-    public  void setY(int index , int y){toaDo[1][index]= y ; }
+    public  void setY(int index , int y){toaDo[index][1]= y ; }
     public int x(int index){
         return toaDo[index][0];
     }
     public int y(int index){
-        return  toaDo[1][index];
+        return  toaDo[index][1];
     }
     //  ham minX , minY dung de tim gia tri toa do nho nhat trong cac khoi hinh
     public  int minX(){
         int  m =  toaDo[0][0];
         for(int i = 0 ; i<4 ; i++){
-                m  = Math.min( m ,toaDo[i][1]);
+                m  = Math.min( m ,toaDo[i][0]);
         }
         return m;
     }
     public  int minY(){
-        int m = toaDo[0][0];
+        int m = toaDo[0][1];
         for (int i = 0; i < 4; i++) {
-            m = Math.min(m , toaDo[1][i]);
+            m = Math.min(m , toaDo[i][1]);
         }
         return  m ;
     }
@@ -88,7 +91,7 @@ public  class Shape {
     public void setRanDomShape(){
         Random random = new Random();
 
-        int  x =  Math.abs(random.nextInt())%7 + 1 ;
+        int  x =  Math.abs(random.nextInt()) % 7 + 1 ;
         Tetrominoes[] values  =  Tetrominoes.values();
         setHinhDangShape(values[x]);
 

@@ -120,7 +120,7 @@ public class MenuView extends JFrame  {
         this.imageIcon = imageIcon;
     }
 
-    public static void main(String[] args) {
-        new MenuView();
-    }
+//    public static void main(String[] args) {
+//        new MenuView();
+//    }
 }

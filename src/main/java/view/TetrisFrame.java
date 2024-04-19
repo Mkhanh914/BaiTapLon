@@ -1,11 +1,28 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
+import controller.ActionListenerController;
+import controller.ShapeController;
 
-public class TetrisFrame  extends JFrame {
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TetrisFrame  extends JFrame   {
     private  JLabel statusBar ;
+    private  JLabel  textJLabel = new JLabel("Name:");
+
+    private  JLabel pointJLabel = new JLabel("Point:");
+    private JButton pauseButton = new JButton() ;
+    private JButton exitButton  = new JButton();
+    private  JLabel nameJLabel = new JLabel();
+    private  JLabel pointxJlable =  new JLabel() ;
     private  TetrisBoard board ;
+    private ActionListenerController actionListenerController ;
+
+
 
     /**
      * Constructs a new frame that is initially invisible.
@@ -20,9 +37,13 @@ public class TetrisFrame  extends JFrame {
      * @see Component#setVisible
      * @see JComponent#getDefaultLocale
      */
-    public TetrisFrame() throws HeadlessException {
-        statusBar = new JLabel(" 0");
+    public TetrisFrame() {
+        statusBar = new JLabel();
         board = new TetrisBoard(this);
+
+
+        actionListenerController = new ActionListenerController(board.getShapeController());
+
     }
     public  void init(){
         setLayout(new BorderLayout());
@@ -31,6 +52,25 @@ public class TetrisFrame  extends JFrame {
         board.start();
         setSize(300,600);
         setPreferredSize(new Dimension(300,600));
+        statusBar.setPreferredSize(new Dimension(300,100));
+
+        statusBar.setBorder(new LineBorder(new Color(0, 0, 0)));
+
+        statusBar.setLayout(new GridLayout(3,2));
+        statusBar.add(textJLabel);
+        statusBar.add(nameJLabel);
+        statusBar.add(pointJLabel);
+        statusBar.add(pointxJlable);
+        statusBar.add(pauseButton);
+        statusBar.add(exitButton);
+        pauseButton.setText("Pause");
+        exitButton.setText("Exit");
+        pauseButton.addActionListener(actionListenerController);
+        exitButton.addActionListener(actionListenerController);
+
+
+
+
         setTitle("TETRIS");
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +78,21 @@ public class TetrisFrame  extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
     }
-    JLabel getStatusBar(){
-        return statusBar;
+
+
+    public JLabel getNameJLabel() {
+        return nameJLabel;
+    }
+
+    public void setNameJLabel(JLabel nameJLabel) {
+        this.nameJLabel = nameJLabel;
+    }
+
+    public JLabel getPointxJlable() {
+        return pointxJlable;
+    }
+
+    public void setPointxJlable(JLabel pointxJlable) {
+        this.pointxJlable = pointxJlable;
     }
 }
