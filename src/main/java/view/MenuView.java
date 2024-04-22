@@ -1,5 +1,6 @@
 package view;
 
+import controller.ActionListenerController;
 import controller.MouseClickController;
 
 import javax.swing.*;
@@ -11,11 +12,13 @@ import java.util.EventListener;
 
 
 public class MenuView extends JFrame  {
+    private  JButton continueGame;
     private  JButton batDauButton ;
     private  JButton xepHangButton;
     protected   JLabel backgroundPanel;
     private JButton thoatButton;
     protected  ImageIcon imageIcon;
+//    private ActionListenerController actionListenerController = new ActionListenerController();
 //    protected  static  int x = 300 , y =  400;
 
     public   MenuView(){
@@ -32,7 +35,7 @@ public class MenuView extends JFrame  {
     }
     public  void initMenu(){
         setTitle("Xếp Gạch");
-        batDauButton = new JButton("Bắt đầu");
+        batDauButton = new JButton("Chơi mới");
         batDauButton.setBounds(100,100,100,30);
         batDauButton.setBackground(new Color(51, 255, 255));
         batDauButton.setFont(new Font("Arial" , Font.BOLD , 14));
@@ -48,11 +51,24 @@ public class MenuView extends JFrame  {
 
 
 
+        continueGame = new JButton("Tiếp tục");
+        continueGame.setBounds(100,50,100,30);
+        continueGame.setBackground(new Color(51,255,255));
+        continueGame.setFont(new Font("Arial" , Font.BOLD , 14));
+//        continueGame.addActionListener(actionListenerController);
+
 
         xepHangButton  = new JButton("Xếp hạng");
         xepHangButton.setBounds(100,150,100,30);
         xepHangButton.setBackground(new Color(51,255,255));
         xepHangButton.setFont(new Font("Arial" , Font.BOLD , 14));
+        xepHangButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MouseClickController.openRank();
+                dispose();
+            }
+        });
 
         thoatButton  = new JButton("Thoát");
         thoatButton.setBounds(100,200,100,30);
@@ -71,6 +87,7 @@ public class MenuView extends JFrame  {
         //  them background cho menu
         backgroundPanel.setIcon(new ImageIcon("src/main/java/view/img/startImg.jpg"));
         backgroundPanel.setLayout(null);
+        backgroundPanel.add(continueGame);
         backgroundPanel.add(batDauButton);
         backgroundPanel.add(xepHangButton);
         backgroundPanel.add(thoatButton);
@@ -120,7 +137,7 @@ public class MenuView extends JFrame  {
         this.imageIcon = imageIcon;
     }
 
-//    public static void main(String[] args) {
-//        new MenuView();
-//    }
+    public static void main(String[] args) {
+        new MenuView();
+    }
 }

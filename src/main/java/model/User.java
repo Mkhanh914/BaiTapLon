@@ -2,10 +2,11 @@ package model;
 
 public class User {
     private  String name ;
-    private  int values ;
+    private  int point ;
 
-    public User(String name) {
+    public User(String name, int point) {
         this.name = name;
+        this.point = point;
     }
 
     public String getName() {
@@ -16,11 +17,11 @@ public class User {
         this.name = name;
     }
 
-    public int getValues() {
-        return values;
+    public int getPoint() {
+        return point;
     }
 
-    public void setValues(int values) {
-        this.values = values;
+    public void setPoint(int point) {
+        this.point = point;
     }
 }

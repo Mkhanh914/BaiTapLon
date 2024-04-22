@@ -10,6 +10,7 @@ import java.awt.event.*;
 public class ActionListenerController extends KeyAdapter  implements ActionListener {
 
     ShapeController controller  ;
+    GameSaver gameSaver;
 
 
     public ActionListenerController(ShapeController controller) {
@@ -39,6 +40,7 @@ public class ActionListenerController extends KeyAdapter  implements ActionListe
 
             }
         }
+
 
 
 
@@ -79,7 +81,7 @@ public class ActionListenerController extends KeyAdapter  implements ActionListe
            jDialog.setVisible(true);
            Integer result = (Integer) jOptionPane.getValue();
            if (result !=null && result ==  JOptionPane.YES_OPTION){
-               // thuc hien thoat game , ben canh do su luu ten va ng choi lai
+               // thuc hien thoat game , ben canh do su luu ten va điểm cho ng  choi
                System.exit(0);
            }
            else {
@@ -88,5 +90,15 @@ public class ActionListenerController extends KeyAdapter  implements ActionListe
            }
 
        }
+       if ("Tiếp tục".equals(e.getActionCommand())){
+           //  read file
+           ShapeController shapeController = gameSaver.loadGame("gameState.ser");
+           if (shapeController != null){
+               controller =  shapeController;
+               controller.startGame();
+           }
+
+       }
+
     }
 }

@@ -16,6 +16,16 @@ public  class TetrisBoard extends JPanel implements ActionListener {
      * @param e the event to be processed
      */
     private  final   int    BOARD_WIDTH = 10 ;
+    private  TetrisFrame tetrisFrame;
+
+    public TetrisFrame getTetrisFrame() {
+        return tetrisFrame;
+    }
+
+    public void setTetrisFrame(TetrisFrame tetrisFrame) {
+        this.tetrisFrame = tetrisFrame;
+    }
+
     private  final   int    BOARD_HEIGHT = 22 ;
     private JLabel statusBar;
     private ShapeController shapeController;
@@ -23,6 +33,7 @@ public  class TetrisBoard extends JPanel implements ActionListener {
 
 
     TetrisBoard(TetrisFrame tetrisFrame ){
+        this.tetrisFrame = tetrisFrame;
 
         setFocusable(true);
         shapeController = new ShapeController(BOARD_WIDTH , BOARD_HEIGHT , this);
@@ -84,7 +95,11 @@ public  class TetrisBoard extends JPanel implements ActionListener {
 
 
     }
-//    public  void setStatusBar(String text){statusBar.setText(text);}
+    public  void setStatusBar(String text){statusBar.setText(text);}
+
+    public JLabel getStatusBar() {
+        return statusBar;
+    }
 
     /**
      * Invoked when an action occurs.
@@ -95,4 +110,7 @@ public  class TetrisBoard extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
             shapeController.gameAction();
     }
+
+
+
 }

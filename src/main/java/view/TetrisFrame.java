@@ -1,23 +1,20 @@
 package view;
 
 import controller.ActionListenerController;
-import controller.ShapeController;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TetrisFrame  extends JFrame   {
+
     private  JLabel statusBar ;
     private  JLabel  textJLabel = new JLabel("Name:");
 
     private  JLabel pointJLabel = new JLabel("Point:");
     private JButton pauseButton = new JButton() ;
     private JButton exitButton  = new JButton();
-    private  JLabel nameJLabel = new JLabel();
+    private  JLabel nameJLabel = new JLabel("");
     private  JLabel pointxJlable =  new JLabel() ;
     private  TetrisBoard board ;
     private ActionListenerController actionListenerController ;
@@ -44,6 +41,7 @@ public class TetrisFrame  extends JFrame   {
 
         actionListenerController = new ActionListenerController(board.getShapeController());
 
+
     }
     public  void init(){
         setLayout(new BorderLayout());
@@ -55,6 +53,9 @@ public class TetrisFrame  extends JFrame   {
         statusBar.setPreferredSize(new Dimension(300,100));
 
         statusBar.setBorder(new LineBorder(new Color(0, 0, 0)));
+
+//        nameJLabel.setText( new Login().getUser().getName());
+        pointxJlable.setText("0");
 
         statusBar.setLayout(new GridLayout(3,2));
         statusBar.add(textJLabel);
@@ -92,7 +93,13 @@ public class TetrisFrame  extends JFrame   {
         return pointxJlable;
     }
 
-    public void setPointxJlable(JLabel pointxJlable) {
-        this.pointxJlable = pointxJlable;
+    public  void updateScore(int point){
+        pointxJlable.setText(String.valueOf(point));
     }
+    public  void updateName(String name){
+        nameJLabel.setText(name);
+        nameJLabel.revalidate();
+        nameJLabel.repaint();
+    }
+
 }

@@ -140,7 +140,10 @@ public class ShapeController {
          }
          if (numFullLine >  0 ){
              numLinesRemoved+= numFullLine;
+
              // ..........viet tiep phan cong diem vao value khi 1 hang day
+             tetrisBoard.getTetrisFrame().updateScore(numLinesRemoved*10);
+
              // xoa 1 hang do di
              isFallingFinish = true;
              currentPiece.setHinhDangShape(Shape.Tetrominoes.noShape);

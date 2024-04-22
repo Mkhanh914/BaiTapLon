@@ -2,6 +2,8 @@ package controller;
 
 import view.Login;
 import view.MenuView;
+import view.RankView;
+import view.TetrisFrame;
 
 import java.util.Objects;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -12,7 +14,7 @@ public class MouseClickController extends Thread {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                new Login();
+                new Login().init();
             }
         }).start();
 
@@ -27,6 +29,24 @@ public class MouseClickController extends Thread {
     }
     public  static  void exit(){
 
+    }
+    public  static void startGame(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+              if (Login.login != null)
+                  Login.login.getTetrisFrame().init();
+
+            }
+        }).start();
+    }
+    public  static  void openRank(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new RankView();
+            }
+        }).start();
     }
 
 }
