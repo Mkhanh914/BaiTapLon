@@ -1,6 +1,7 @@
 package view;
 
 import com.sun.tools.javac.Main;
+import controller.ConnectDB;
 import controller.MouseClickController;
 import model.User;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class Login extends JFrame {
@@ -54,19 +56,39 @@ public class Login extends JFrame {
                         System.out.println("ten vua luu  duoc la : " + user.getName() + user.getPoint());
                         tetrisFrame.updateName(user.getName());
                         System.out.println(tetrisFrame.getNameJLabel().getText());
-                        MouseClickController.startGame();
-                        dispose();
+                        try {
+                            if (new ConnectDB().checkName(user.getName())){
+                                JOptionPane optionPane = new JOptionPane("Tên " + user.getName() +" đã tồn tại , bạn có muốn chơi với dưới tên này không ?", JOptionPane.QUESTION_MESSAGE ,JOptionPane.YES_NO_OPTION);
+                                JDialog jDialog = optionPane.createDialog("OK");
+                                jDialog.setVisible(true);
+                                Integer result = (Integer) optionPane.getValue();
+                                if (result ==  JOptionPane.YES_OPTION){
+                                    MouseClickController.startGame();
+                                    dispose();
+                                }
+                                else if (result == JOptionPane.NO_OPTION){
+                                    jDialog.dispose();
+                                }
+                            }
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
                     }
                     //  su li su kien khi ma ng dung khong nhap ten va ng dung nhap trung ten da co san
                     if (userName.getText().isEmpty()){
                         //  ơ đây con 1 truong hop nua la khi nhap tên đã có trong sql
                         // khi có tên đấy thì ta cần phải sử lý dữ kiện so sánh xong
                         // cuối cùng đưa ra thông báo cho ng dùng biết được .
-                        JOptionPane optionPane = new JOptionPane("Vui lòng nhập lại tên", JOptionPane.QUESTION_MESSAGE );
+
+                        JOptionPane optionPane = new JOptionPane("Vui lòng nhập tên", JOptionPane.QUESTION_MESSAGE );
                         JDialog jDialog = optionPane.createDialog("OK");
                         jDialog.setVisible(true);
-
+                    }else {
+                        MouseClickController.startGame();
+                        dispose();
                     }
+
                 }
             });
 

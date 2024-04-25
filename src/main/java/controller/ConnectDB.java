@@ -82,7 +82,25 @@ public class ConnectDB {
         }
 
     }
+    public  boolean checkName(String name) throws SQLException {
+        try {
+            Connection connection = DriverManager.getConnection(url,user,password);
+            String checkNames = "select * from users where  name = ?";
+            PreparedStatement statement = connection.prepareStatement(checkNames);
+            statement.setString(1,name);
+            ResultSet resultSet = statement.executeQuery();
+            boolean nameExists =  resultSet.next();
+            return nameExists;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void main(String[] args) throws RuntimeException, SQLException {
-            new ConnectDB().showResutl();
+            if (new ConnectDB().checkName("hieuti")){
+                System.out.println("co trong sql");
+            }else {
+                System.out.println("khong co !");
+            }
+
     }
 }
