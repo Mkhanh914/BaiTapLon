@@ -2,7 +2,10 @@ package controller;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
+import java.awt.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 import java.util.spi.CalendarNameProvider;
 
@@ -94,6 +97,24 @@ public class ConnectDB {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+    }
+    public List<String[]> getRankData(){
+        List<String[]>  data = new ArrayList<>();
+        try {
+            Connection connection  = DriverManager.getConnection(url,user,password);
+            String getRank =  "select name , point from users order by point desc";
+            PreparedStatement statement = connection.prepareStatement(getRank);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString("name");
+                int point = resultSet.getInt("point");
+                data.add(new String[]{name , Integer.toString(point)});
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
     }
     public static void main(String[] args) throws RuntimeException, SQLException {
             if (new ConnectDB().checkName("hieuti")){

@@ -18,6 +18,8 @@ public class TetrisFrame  extends JFrame   {
     private  JLabel pointxJlable =  new JLabel() ;
     private  TetrisBoard board ;
     private ActionListenerController actionListenerController ;
+    private ActionListenerController actionListenerController1 ;
+
 
 
 
@@ -37,12 +39,16 @@ public class TetrisFrame  extends JFrame   {
     public TetrisFrame() {
         statusBar = new JLabel();
         board = new TetrisBoard(this);
+        board.setTetrisFrame(this);
 
 
         actionListenerController = new ActionListenerController(board.getShapeController());
+        actionListenerController1 = new ActionListenerController(board.getShapeController() ,board.getTetrisFrame());
 
 
     }
+
+
     public  void init(){
         setLayout(new BorderLayout());
         add(statusBar ,BorderLayout.SOUTH);
@@ -67,7 +73,7 @@ public class TetrisFrame  extends JFrame   {
         pauseButton.setText("Pause");
         exitButton.setText("Exit");
         pauseButton.addActionListener(actionListenerController);
-        exitButton.addActionListener(actionListenerController);
+        exitButton.addActionListener(actionListenerController1);
 
 
 
@@ -101,5 +107,16 @@ public class TetrisFrame  extends JFrame   {
         nameJLabel.revalidate();
         nameJLabel.repaint();
     }
+
+    public TetrisBoard getBoard() {
+        return board;
+    }
+    public String getName(){
+        return nameJLabel.getText();
+    }
+    public int getPoint(){
+        return Integer.parseInt(pointxJlable.getText());
+    }
+
 
 }

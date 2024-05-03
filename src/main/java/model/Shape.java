@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public  class Shape {
+public  class Shape implements Serializable {
     public enum Tetrominoes {
         noShape ,  zShape , tShape  , sShape , lShape  , squareShape , lShape1  , lineShape ;
     }

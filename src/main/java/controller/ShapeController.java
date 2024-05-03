@@ -5,9 +5,12 @@ import view.TetrisBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class ShapeController {
-    private   TetrisBoard tetrisBoard ;
+public class ShapeController implements Serializable {
+
+    private static final  long seriaVersionUID = 1L;
+    private transient   TetrisBoard tetrisBoard ;
     private  int boardWidth  ;
     private int boardHeight ;
     private  boolean isFallingFinish = false;
@@ -20,9 +23,10 @@ public class ShapeController {
     private Shape currentPiece;
     private Shape.Tetrominoes[] board;
     public  ShapeController(int width , int height , TetrisBoard tetrisBoard ){
+        this.tetrisBoard = tetrisBoard;
          this.boardHeight = height ;
          this.boardWidth = width;
-         this.tetrisBoard = tetrisBoard;
+
          currentPiece = new Shape();
          timer = new Timer(400,tetrisBoard);
          timer.start();
@@ -73,6 +77,9 @@ public class ShapeController {
              timer.stop();
              isStarted = false;
              // se hiện bảng game over ở phần này . code viet tiep can phai hoan chinh them /
+//             lưu điểm   cho nó  khi kết thúc trò chơi .
+             new ConnectDB().insertData(tetrisBoard.getTetrisFrame().getName() , tetrisBoard.getTetrisFrame().getPoint());
+             System.out.println("gameOver");
          }
     }
     //  hoat dong cua tro choi
@@ -142,7 +149,16 @@ public class ShapeController {
              numLinesRemoved+= numFullLine;
 
              // ..........viet tiep phan cong diem vao value khi 1 hang day
-             tetrisBoard.getTetrisFrame().updateScore(numLinesRemoved*10);
+//             chỗ này khi xóa đi 1 hàng thì phải có audio vang lên . trong trường  hợp âm thanh không bị bắt .
+             tetrisBoard.getTetrisFrame().updateScore(numLinesRemoved*100);
+
+//             AudioController audioController = AudioController.getInstance();
+//             audioController.stopAudio();
+//             audioController.audioInGame("src/main/java/controller/audio/audioPoint.wav");
+//
+//             audioController.stopAudio();
+
+
 
              // xoa 1 hang do di
              isFallingFinish = true;
@@ -236,4 +252,6 @@ public class ShapeController {
         }
         tetrisBoard.repaint();
     }
+
+
 }

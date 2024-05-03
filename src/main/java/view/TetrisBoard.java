@@ -34,7 +34,7 @@ public  class TetrisBoard extends JPanel implements ActionListener {
 
     TetrisBoard(TetrisFrame tetrisFrame ){
         this.tetrisFrame = tetrisFrame;
-
+        statusBar = new JLabel();
         setFocusable(true);
         shapeController = new ShapeController(BOARD_WIDTH , BOARD_HEIGHT , this);
 //        statusBar = tetrisFrame.getStatusBar();
@@ -55,6 +55,7 @@ public  class TetrisBoard extends JPanel implements ActionListener {
     }
 
     public  void paint(Graphics g){
+
         super.paint(g);
         shapeController.paint(g, getSize().getWidth() ,getSize().getHeight());
     }
@@ -109,7 +110,12 @@ public  class TetrisBoard extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
             shapeController.gameAction();
+
     }
+    public  void setShapeController(ShapeController shapeController){
+        this.shapeController =shapeController;
+    }
+
 
 
 

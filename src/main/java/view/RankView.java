@@ -1,13 +1,20 @@
 package view;
 
+import controller.ConnectDB;
 import controller.MouseClickController;
+import model.User;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
+import java.util.function.ObjDoubleConsumer;
 
 public class RankView extends JFrame {
+    private Vector<User> users = new Vector<>();
     private  JTable rankJtable;
     private JButton buttonBack ;
     private  JLabel rankLabel;
@@ -25,8 +32,14 @@ public class RankView extends JFrame {
 
         backgroundJlable  = new JLabel();
 //        backgroundJlable.setIcon(new ImageIcon("src/main/java/view/img/startImg.jpg"));
-        rankJtable = new JTable(5,2);
-        rankJtable.setBounds(0,0,200 , 400);
+        ConnectDB connectDB = new ConnectDB();
+        List<String[]> data = connectDB.getRankData();
+        DefaultTableModel model = new DefaultTableModel(data.toArray(new Object[0][0]) , new  Object[]{"name" , "point"});
+
+        rankJtable = new JTable(model);
+
+
+//        rankJtable.setBounds(0,0,300 , 500);
 //        rankJtable.setBackground(Color.RED);
 
         buttonBack  = new JButton("Back");
@@ -51,7 +64,7 @@ public class RankView extends JFrame {
         setVisible(true);
     }
 
-//    public static void main(String[] args) {
-//        new RankView();
-//    }
+    public static void main(String[] args) {
+        new RankView();
+    }
 }
