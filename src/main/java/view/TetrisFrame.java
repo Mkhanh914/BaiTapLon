@@ -5,6 +5,8 @@ import controller.ActionListenerController;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TetrisFrame  extends JFrame   {
 
@@ -81,9 +83,38 @@ public class TetrisFrame  extends JFrame   {
         setTitle("TETRIS");
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         setVisible(true);
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+    public   void initGameOver(){
+
+       JOptionPane jOptionPane = new JOptionPane("Game Over , your score : " + getPoint() , JOptionPane.QUESTION_MESSAGE , JOptionPane.YES_NO_OPTION );
+
+        Dialog jDialog = jOptionPane.createDialog("GameOver");
+        jDialog.setVisible(true);
+        jDialog.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                dispose();
+                new MenuView();
+
+            }
+        });
+        Integer integer = (Integer)  jOptionPane.getValue();
+        if (integer !=null && integer == JOptionPane.OK_OPTION){
+            board.getShapeController().startGame();
+        }else{
+            new MenuView();
+            dispose();
+        }
+
+
+
+        // reset game;
+
+
     }
 
 
@@ -117,6 +148,8 @@ public class TetrisFrame  extends JFrame   {
     public int getPoint(){
         return Integer.parseInt(pointxJlable.getText());
     }
+
+
 
 
 }

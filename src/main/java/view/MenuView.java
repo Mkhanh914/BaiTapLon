@@ -3,12 +3,9 @@ package view;
 import controller.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.EventListener;
 
 
 public class MenuView extends JFrame  {
@@ -20,8 +17,6 @@ public class MenuView extends JFrame  {
     protected   JLabel backgroundPanel;
     private JButton thoatButton;
     protected  ImageIcon imageIcon;
-//    private ActionListenerController actionListenerController = new ActionListenerController();
-//    protected  static  int x = 300 , y =  400;
 
     public   MenuView(){
 
@@ -44,49 +39,17 @@ public class MenuView extends JFrame  {
         audioController = AudioController.getInstance();
         audioController.audioInGame("src/main/java/controller/audio/audioGame.wav");
         setTitle("Xếp Gạch");
-        batDauButton = new JButton("Chơi mới");
+        batDauButton = new JButton("Chơi");
         batDauButton.setBounds(100,100,100,30);
         batDauButton.setBackground(new Color(51, 255, 255));
         batDauButton.setFont(new Font("Arial" , Font.BOLD , 14));
         batDauButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseClickController.openLogin();
+                ThreadController.openLogin();
                 dispose(); // close MenuView
             }
         });
-
-
-
-
-
-//        continueGame = new JButton("Tiếp tục");
-//        continueGame.setBounds(100,50,100,30);
-//        continueGame.setBackground(new Color(51,255,255));
-//        continueGame.setFont(new Font("Arial" , Font.BOLD , 14));
-//        continueGame.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File gameStateFile  =  new File("gameState.ser");
-//
-//                if (gameStateFile.exists()){
-//                    ShapeController shapeController = gameSaver.loadGame(gameStateFile);
-//                    if (shapeController != null){
-//                        TetrisFrame tetrisFrame = new TetrisFrame();
-//
-//                        tetrisFrame.getBoard().setShapeController(shapeController);
-//                        tetrisFrame.getBoard().getShapeController().startGame();
-//                        tetrisFrame.init();
-//                    }
-//                    else{
-//                        JOptionPane.showConfirmDialog(MenuView.this,"không tải được trò chơi.", "Lỗi" , JOptionPane.ERROR_MESSAGE);
-//                    }
-//                }else{
-//                    JOptionPane.showConfirmDialog(MenuView.this,"không tìm thấy file .", "Lỗi" , JOptionPane.ERROR_MESSAGE);
-//                }
-//            }
-//        });
-
 
         xepHangButton  = new JButton("Xếp hạng");
         xepHangButton.setBounds(100,150,100,30);
@@ -95,7 +58,7 @@ public class MenuView extends JFrame  {
         xepHangButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseClickController.openRank();
+                ThreadController.openRank();
                 dispose();
             }
         });
@@ -108,6 +71,7 @@ public class MenuView extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                audioController.stopAudio();
             }
         });
 
@@ -172,10 +136,5 @@ public class MenuView extends JFrame  {
     }
 
 
-    public static void main(String[] args) {
-        new MenuView();
 
-
-
-    }
 }

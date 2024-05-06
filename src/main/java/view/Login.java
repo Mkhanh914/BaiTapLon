@@ -1,9 +1,8 @@
 package view;
 
-import com.sun.tools.javac.Main;
 import controller.AudioController;
 import controller.ConnectDB;
-import controller.MouseClickController;
+import controller.ThreadController;
 import model.User;
 
 
@@ -69,7 +68,7 @@ public class Login extends JFrame {
                     System.out.println(tetrisFrame.getNameJLabel().getText());
                     try {
                         if (new ConnectDB().checkName(user.getName())) {
-                            JOptionPane optionPane = new JOptionPane("Tên " + user.getName() + " đã tồn tại , bạn có muốn chơi  dưới tên này không ?", JOptionPane.QUESTION_MESSAGE);
+                            JOptionPane optionPane = new JOptionPane("Tên " + user.getName() + " đã tồn tại "+" \nBạn có muốn chơi  dưới tên này không ?", JOptionPane.QUESTION_MESSAGE);
                             JDialog jDialog = optionPane.createDialog("OK");
                             jDialog.setVisible(true);
                             jDialog.addWindowListener(new WindowAdapter() {
@@ -88,12 +87,12 @@ public class Login extends JFrame {
                             });
                             Integer result = (Integer) optionPane.getValue();
                             if (result != null &&  result == JOptionPane.OK_OPTION) {
-                                MouseClickController.startGame();
+                                ThreadController.startGame();
                                 audioController.stopAudio();
                                 dispose();
                             }
                         } else  {
-                            MouseClickController.startGame();
+                            ThreadController.startGame();
                             audioController.stopAudio();
                             dispose();
                         }
@@ -129,7 +128,7 @@ public class Login extends JFrame {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseClickController.openMenuView();
+                ThreadController.openMenuView();
                 dispose();
             }
         });
@@ -161,7 +160,5 @@ public class Login extends JFrame {
         return tetrisFrame;
     }
 
-//    public static void main(String[] args) {
-//        new Login().init();
-//    }
+
 }

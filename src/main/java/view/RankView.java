@@ -1,7 +1,7 @@
 package view;
 
 import controller.ConnectDB;
-import controller.MouseClickController;
+import controller.ThreadController;
 import model.User;
 
 import javax.swing.*;
@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
-import java.util.function.ObjDoubleConsumer;
 
 public class RankView extends JFrame {
     private Vector<User> users = new Vector<>();
@@ -46,7 +45,7 @@ public class RankView extends JFrame {
         buttonBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MouseClickController.openMenuView();
+                ThreadController.openMenuView();
                 dispose();
             }
         });
@@ -64,7 +63,5 @@ public class RankView extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new RankView();
-    }
+
 }

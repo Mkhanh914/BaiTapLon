@@ -57,12 +57,11 @@ package controller;
 import view.Login;
 import view.MenuView;
 import view.RankView;
-import view.TetrisFrame;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MouseClickController {
+public class ThreadController {
     private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
     public static void openLogin() {

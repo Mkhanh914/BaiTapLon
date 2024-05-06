@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-public class ShapeController implements Serializable {
+public class ShapeController  {
 
     private static final  long seriaVersionUID = 1L;
     private transient   TetrisBoard tetrisBoard ;
@@ -78,6 +78,7 @@ public class ShapeController implements Serializable {
              isStarted = false;
              // se hiện bảng game over ở phần này . code viet tiep can phai hoan chinh them /
 //             lưu điểm   cho nó  khi kết thúc trò chơi .
+             tetrisBoard.getTetrisFrame().initGameOver();
              new ConnectDB().insertData(tetrisBoard.getTetrisFrame().getName() , tetrisBoard.getTetrisFrame().getPoint());
              System.out.println("gameOver");
          }

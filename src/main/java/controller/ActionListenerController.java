@@ -8,49 +8,60 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
 
-public class ActionListenerController extends KeyAdapter  implements ActionListener, Serializable {
+public class ActionListenerController extends KeyAdapter implements ActionListener{
 
 
-    private ShapeController controller  ;
-    private TetrisFrame tetrisFrame ;
+    private ShapeController controller;
+    private TetrisFrame tetrisFrame;
 
 
-
-    public ActionListenerController(ShapeController controller ) {
+    public ActionListenerController(ShapeController controller) {
         this.controller = controller;
 
     }
-    public  ActionListenerController(ShapeController shapeController , TetrisFrame tetrisFrame){
-        this.controller  = shapeController;
+
+    public ActionListenerController(ShapeController shapeController, TetrisFrame tetrisFrame) {
+        this.controller = shapeController;
         this.tetrisFrame = tetrisFrame;
     }
 
 
-    public  void keyPressed(KeyEvent e){
-        if(!controller.isStarted() || controller.inCurrentPieceNoShape()) return;
+    public void keyPressed(KeyEvent e) {
+        if (!controller.isStarted() || controller.inCurrentPieceNoShape()) return;
 
 
         int keyCode = e.getKeyCode();
-        if (keyCode == 'p' || keyCode == 'P'  ){
+        if (keyCode == 'p' || keyCode == 'P') {
             controller.pause();
             return;
         }
-//        if (controller.isPaused()) return;
+        if (keyCode == 'D' || keyCode == 'D') {
+            controller.oneLineDown();
+            return;
+        }
 
-        if (!controller.isPaused()){
-            switch (keyCode){
-                case KeyEvent.VK_LEFT: controller.moveLeft()  ; System.out.println("left"); break;
-                case KeyEvent.VK_RIGHT: controller.moveRight() ;
-                    System.out.println("right");break;
-                case KeyEvent.VK_DOWN: controller.rotateRight();break;
-                case KeyEvent.VK_UP: controller.rotateLeft();break;
-                case KeyEvent.VK_SPACE: controller.dropDown();break;
+        if (!controller.isPaused()) {
+            switch (keyCode) {
+                case KeyEvent.VK_LEFT:
+                    controller.moveLeft();
+                    System.out.println("left");
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    controller.moveRight();
+                    System.out.println("right");
+                    break;
+                case KeyEvent.VK_DOWN:
+                    controller.rotateRight();
+                    break;
+                case KeyEvent.VK_UP:
+                    controller.rotateLeft();
+                    break;
+                case KeyEvent.VK_SPACE:
+                    controller.dropDown();
+                    break;
 
             }
         }
-
-
-
 
 
     }
@@ -62,16 +73,17 @@ public class ActionListenerController extends KeyAdapter  implements ActionListe
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-       if ("Pause".equals(e.getActionCommand()) || "Resume".equals(e.getActionCommand())) {
-           controller.pause();
-           JButton soure = (JButton) e.getSource();
-           soure.setText(controller.isPaused() ? "Resume" : "Pause");
-           controller.getTetrisBoard().requestFocusInWindow();
-
-       }
-        if ("Exit".equals(e.getActionCommand())){
+        if ("Pause".equals(e.getActionCommand()) || "Resume".equals(e.getActionCommand())) {
             controller.pause();
-            JOptionPane jOptionPane = new JOptionPane("Are you want to exit the game ? " , JOptionPane.QUESTION_MESSAGE , JOptionPane.YES_NO_OPTION);
+            JButton soure = (JButton) e.getSource();
+            soure.setText(controller.isPaused() ? "Resume" : "Pause");
+            controller.getTetrisBoard().requestFocusInWindow();
+
+        }
+        if ("Exit".equals(e.getActionCommand())) {
+
+            controller.pause();
+            JOptionPane jOptionPane = new JOptionPane("Are you want to exit the game ? ", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
             JDialog jDialog = jOptionPane.createDialog("Exit");
             jDialog.addWindowFocusListener(new WindowAdapter() {
                 /**
@@ -88,39 +100,18 @@ public class ActionListenerController extends KeyAdapter  implements ActionListe
             });
             jDialog.setVisible(true);
             Integer result = (Integer) jOptionPane.getValue();
-            if (result !=null && result ==  JOptionPane.YES_OPTION){
-//                File gameStateFile = new File("gameState.ser");
-//                if (gameStateFile.exists()){
-//                    gameStateFile.delete();
-//                }
-//                // thuc hien thoat game , ben canh do su luu ten va điểm cho ng  choi
-//
-//                gameSaver.saveGame(controller);
-//                System.out.println("luu file thanh cong!");
-//                System.exit(0);
-
+            if (result != null && result == JOptionPane.YES_OPTION) {
 // sử dụng  khi ng choi bấm yes thì sẽ lưu điểm  của ng chơi vào nêu mà  ng chơi có điểm cao hơn lúc trước
 //                còn nếu mà ng chơi mới thì lưu trực tiếp vào.
 
-                new ConnectDB().insertData(tetrisFrame.getName() , tetrisFrame.getPoint());
+                new ConnectDB().insertData(tetrisFrame.getName(), tetrisFrame.getPoint());
                 System.exit(0);
-            }
-            else {
+            } else {
                 controller.pause();
                 controller.getTetrisBoard().requestFocusInWindow();
             }
 
         }
-//        if ("Tiếp tục".equals(e.getActionCommand())){
-//            //  read file
-//            ShapeController shapeController = gameSaver.loadGame();
-//            if (shapeController != null){
-//                controller =  shapeController;
-//                controller.startGame();
-//            }
-//
-//        }
-
 
 
     }
